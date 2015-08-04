@@ -1,0 +1,53 @@
+# File
+Size:
+	Empty.				[single][property emptyfile]
+	Not empty.					
+Number of lines outputted:
+	None.				[single][if !emptyfile] 
+	One.						[if !emptyfile]
+	Many.						[if !emptyfile]
+
+
+# Fields
+Presence of a list of bytes, characters, or fields:
+	Not present.		[error]
+	Present.			[single]
+Valid integer field input:
+	0.					[error]
+	>0.					[single][property posInt]#only positive integers are valid range boundaries				
+	<0.			
+Presence of a range:
+	Not present.		
+	Present.					[property rangePresent]
+Dash (-) used in range?:
+	Yes.				[single][if rangePresent && posInt]
+	No.							[if rangePresent && posInt] [error]
+Range in bounds?:
+	Invalid range.				[if rangePresent && posInt] [error]
+	Yes.						[if rangePresent && posInt] 
+Presence of multiple fields:
+	Yes.						[property multipleFields]
+	No.
+Comma (,) seperating multiple fields?:
+	Yes.				[single][if multipleFields && posInt]#can have multiple int fields so rangePresent not included
+	No.							[if multipleFields && posInt] [error]
+
+# Delimiter
+Presence of delimiter:
+	Not present.		
+	Present.					[property dPresent]
+Special characters (><*|&):
+	Escaped.			
+	Not escaped.		[error]			
+Lines printed in full?:
+	Yes.				[single][if !dPresent] 
+	No.							[if !dPresent] [error]
+Delimiter length:
+	One.				[single][if dPresent]
+	More than one.				[if dPresent] [error]
+
+# Filename
+Presence of a file corresponding to the name:
+	Not present.		[error]
+	Present.			
+	
